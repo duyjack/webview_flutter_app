@@ -29,7 +29,7 @@ class _WebViewAppState extends State<WebViewApp> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       Color statusBarColor = widget.useBlackTheme ? Colors.white : Colors.black;
       Brightness statusBarBrightness =
-          widget.useBlackTheme ? Brightness.light : Brightness.dark;
+          widget.useBlackTheme ? Brightness.dark : Brightness.light;
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle.dark.copyWith(
           statusBarColor: statusBarColor,
