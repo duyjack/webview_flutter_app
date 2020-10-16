@@ -6,12 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewApp extends StatefulWidget {
-  WebViewApp({Key key, Color backgroundColor, this.url})
+  WebViewApp(
+      {Key key, Color backgroundColor, this.url, this.useBlackTheme = true})
       : this.backgroundColor = backgroundColor ?? Colors.black,
         super(key: key);
 
   final Color backgroundColor;
   final String url;
+  final bool useBlackTheme;
 
   @override
   _WebViewAppState createState() => _WebViewAppState();
@@ -25,10 +27,13 @@ class _WebViewAppState extends State<WebViewApp> {
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      Color statusBarColor = widget.useBlackTheme ? Colors.white : Colors.black;
+      Brightness statusBarBrightness =
+          widget.useBlackTheme ? Brightness.light : Brightness.dark;
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle.dark.copyWith(
-          statusBarColor: Colors.white,
-          statusBarBrightness: Brightness.dark,
+          statusBarColor: statusBarColor,
+          statusBarBrightness: statusBarBrightness,
           systemNavigationBarDividerColor: Color(010101),
         ),
       );
